@@ -9,3 +9,10 @@ export function getAllMovies(){
 export function posterUrl(imagePath,size="original"){
     return `${API_URL}${imagePath}/${size}`;
 }
+
+export function extractPaginationFromHeaders(response){
+    let res={
+    }
+    console.log(response.headers);
+
+}
