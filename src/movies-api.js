@@ -6,3 +6,6 @@ export function getAllMovies(){
     return $request.then((response)=>response.json())
 }
 
+export function posterUrl(imagePath,size="original"){
+    return `${API_URL}${imagePath}/${size}`;
+}
