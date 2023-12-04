@@ -1,3 +1,4 @@
+import {getAllMovies} from "./movies-api";
 
 export function createMovieElt(movieData){
     const Div=document.createElement("article");
@@ -17,4 +18,13 @@ export function createMovieElt(movieData){
     movieItemTitle.appendChild(Title);
 
     return Div;
+}
+
+export function updateMoviesElt(){
+    const article=document.querySelector(".movies-list")
+    const films=getAllMovies()
+        .then((response)=>
+            response.map((film)=>article.appendChild(createMovieElt(film))));
+    return  article;
+
 }
