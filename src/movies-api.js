@@ -17,3 +17,13 @@ export function extractPaginationFromHeaders(response){
     };
 
 }
+
+
+export function extractCollectionAndPagination(response){
+        return response.json().then((data)=>{
+            return{
+                collection:data,
+                pagination:extractPaginationFromHeaders(response)
+            }
+            }
+        )}
