@@ -30,7 +30,7 @@ export function updateMoviesElt(){
     const article=document.querySelector(".movies-list")
     const films=getAllMovies()
         .then((response)=>
-            response.map((film)=>article.appendChild(createMovieElt(film))));
+            response.collection.map((film)=>article.appendChild(createMovieElt(film))));
     return  article;
 
 }
