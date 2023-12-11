@@ -32,7 +32,6 @@ export function updateMoviesElt(){
         .then((response)=>
             response.collection.map((film)=>article.appendChild(createMovieElt(film))));
     return  article;
-
 }
 
 export function createPaginationButtonElt(materialIcon, isDisabled, page){
@@ -60,4 +59,35 @@ export function emptyElt(elt){
     while(elt.hasChildNodes()){
         elt.removeChild(elt.firstChild);
     }
+}
+
+
+export function updatePaginationElt(pagination) {
+    if(pagination.last!==1){
+        const nav = document.querySelector('nav.pagination');
+        if (pagination.current === 1) {
+            nav.appendChild(createPaginationButtonElt('first__page', true, 1))
+            nav.appendChild(createPaginationButtonElt('navigate__before', true, pagination.current - 1))
+
+        } else {
+            nav.appendChild(createPaginationButtonElt('first__page', false, 1))
+            nav.appendChild(createPaginationButtonElt('navigate__before', false, pagination.current - 1))
+        }
+
+        const span = document.createElement("span")
+        span.className = "pagination__info"
+        span.textContent = `${pagination.current}/${pagination.last}`
+        nav.appendChild(span);
+
+        if (pagination.current === pagination.last) {
+            nav.appendChild(createPaginationButtonElt('navigate__next', true, pagination.current + 1))
+            nav.appendChild(createPaginationButtonElt('last__page', true, pagination.last))
+        }
+        else{
+            nav.appendChild(createPaginationButtonElt('navigate__next', false, pagination.current + 1))
+            nav.appendChild(createPaginationButtonElt('last__page', false, pagination.last))
+        }
+        return nav;
+    }
+
 }
