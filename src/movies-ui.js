@@ -89,5 +89,12 @@ export function updatePaginationElt(pagination) {
         }
         return nav;
     }
+}
+
+export function setLoading(){
+    emptyElt(document.querySelector('nav.pagination'))
+    const article=document.createElement("article");
+    article.className='loading';
+    const  elmt = document.querySelector('article.movies-list')
 
 }
