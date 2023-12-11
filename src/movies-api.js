@@ -11,8 +11,9 @@ export function posterUrl(imagePath,size="original"){
 }
 
 export function extractPaginationFromHeaders(response){
-    let res={
-    }
-    console.log(response.headers);
+    return {
+        current: parseInt(response.headers.get("Pagination-Current-Page")),
+        last: parseInt(response.headers.get("Pagination-Last-Page")),
+    };
 
 }
