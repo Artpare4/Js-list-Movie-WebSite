@@ -34,3 +34,23 @@ export function updateMoviesElt(){
     return  article;
 
 }
+
+export function createPaginationButtonElt(materialIcon, isDisabled, page){
+
+    const bouton=document.createElement("button");
+    bouton.className="button";
+    bouton.type="button";
+
+    bouton.addEventListener("click",updateMoviesElt);
+
+    if(isDisabled){
+        bouton.disabled=true;
+    }
+
+    const span=document.createElement('span');
+    span.className="material-symbols-outlined";
+    span.textContent=materialIcon;
+    bouton.appendChild(span);
+
+    return bouton;
+}
