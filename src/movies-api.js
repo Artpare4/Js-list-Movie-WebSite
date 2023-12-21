@@ -1,9 +1,15 @@
 export const API_URL="http://movies-api";
 
-export function getAllMovies(page=1){
-    let $request;
-    $request=fetch(`${API_URL}/movies?page=${page}`);
-    return $request.then((response)=>extractCollectionAndPagination(response))
+export function getAllMovies(urlSearchParams){
+
+    if(urlSearchParams instanceof URLSearchParams){
+        let $request;
+        $request=fetch(`${API_URL}/movies?${urlSearchParams}`);
+        return $request.then((response)=>extractCollectionAndPagination(response))
+    }
+    else {
+        return Promise.reject(new Error('Le paramètre n\'est pas un URLSearchParams'))
+    }
 }
 
 export function posterUrl(imagePath,size="original"){

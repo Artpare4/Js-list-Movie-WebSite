@@ -27,15 +27,20 @@ export function createMovieElt(movieData){
 }
 
 export function updateMoviesElt(page=1){
+    const url= new URLSearchParams;
+    url.set("page",page);
     const article=document.querySelector(".movies-list")
     setLoading();
-    const films=getAllMovies(page)
+    const films=getAllMovies(url)
         .then((response)=>{
             emptyElt(document.querySelector('article.movies-list'));
             updatePaginationElt(response.pagination);
             response.collection.forEach((film)=>article.appendChild(createMovieElt(film)))
         }
-        );
+
+        ).catch((error)=>{
+            console.log(error)
+        });
 
     return  article;
 }
@@ -45,7 +50,6 @@ export function createPaginationButtonElt(materialIcon, isDisabled,page){
     const bouton=document.createElement("button");
     bouton.className="button";
     bouton.type="button";
-    console.log(page)
     bouton.addEventListener("click",()=>{
         updateMoviesElt(page);
     });
