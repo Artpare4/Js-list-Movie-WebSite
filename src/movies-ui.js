@@ -26,9 +26,14 @@ export function createMovieElt(movieData){
     return Div;
 }
 
+export function appendSortToQuery(urlSearchParams){
+    const value = document.querySelector('input[type="radio"]').value;
+    urlSearchParams.set(value,'asc');
+}
 export function updateMoviesElt(page=1){
     const url= new URLSearchParams;
     url.set("page",page);
+    appendSortToQuery(url);
     const article=document.querySelector(".movies-list")
     setLoading();
     const films=getAllMovies(url)
