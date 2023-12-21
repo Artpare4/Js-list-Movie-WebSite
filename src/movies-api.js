@@ -1,6 +1,6 @@
 export const API_URL="http://movies-api";
 
-export function getAllMovies(urlSearchParams){
+export function getAllMovies(urlSearchParams,abortController){
 
     if(urlSearchParams instanceof URLSearchParams){
         let $request;
