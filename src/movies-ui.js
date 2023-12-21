@@ -88,7 +88,7 @@ export function updatePaginationElt(pagination) {
         nav.appendChild(span);
 
         if (pagination.current === pagination.last) {
-            nav.appendChild(createPaginationButtonElt('navigate__next', true, pagination.last ))
+            nav.appendChild(createPaginationButtonElt('navigate_next', true, pagination.last ))
             nav.appendChild(createPaginationButtonElt('last_page', true, pagination.last))
         }
         else{
