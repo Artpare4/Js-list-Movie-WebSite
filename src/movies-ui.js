@@ -26,6 +26,8 @@ export function createMovieElt(movieData){
     return Div;
 }
 
+
+
 export function appendSortToQuery(urlSearchParams){
     const value = document.querySelector('input[type="radio"]:checked').value;
     urlSearchParams.set(value,'asc');
@@ -114,4 +116,11 @@ export function setLoading(){
     article.className='loading';
     const  elmt = document.querySelector('article.movies-list');
     elmt.replaceChildren(article);
+}
+
+export function setSortButtonsEltsEvents(){
+    const elmt=document.querySelector('fieldset.sort');
+    elmt.addEventListener("change",()=>{
+        updateMoviesElt();
+    })
 }
