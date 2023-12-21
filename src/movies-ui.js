@@ -27,7 +27,7 @@ export function createMovieElt(movieData){
 }
 
 export function appendSortToQuery(urlSearchParams){
-    const value = document.querySelector('input[type="radio"]').value;
+    const value = document.querySelector('input[type="radio"]:checked').value;
     urlSearchParams.set(value,'asc');
 }
 export function updateMoviesElt(page=1){
