@@ -28,9 +28,12 @@ export function createMovieElt(movieData){
 
 export function updateMoviesElt(){
     const article=document.querySelector(".movies-list")
+    setLoading();
     const films=getAllMovies()
-        .then((response)=>
-            response.collection.map((film)=>article.appendChild(createMovieElt(film))));
+        .then((response)=>{
+            emptyElt(document.querySelector('article.movies-list'));
+            response.collection.map((film)=>article.appendChild(createMovieElt(film)))});
+
     return  article;
 }
 
@@ -95,6 +98,6 @@ export function setLoading(){
     emptyElt(document.querySelector('nav.pagination'))
     const article=document.createElement("article");
     article.className='loading';
-    const  elmt = document.querySelector('article.movies-list')
-
+    const  elmt = document.querySelector('article.movies-list');
+    elmt.replaceChildren(article);
 }
