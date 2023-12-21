@@ -26,31 +26,36 @@ export function createMovieElt(movieData){
     return Div;
 }
 
-export function updateMoviesElt(){
+export function updateMoviesElt(page=1){
     const article=document.querySelector(".movies-list")
     setLoading();
-    const films=getAllMovies()
+    const films=getAllMovies(page)
         .then((response)=>{
             emptyElt(document.querySelector('article.movies-list'));
-            response.collection.map((film)=>article.appendChild(createMovieElt(film)))});
+            updatePaginationElt(response.pagination);
+            response.collection.forEach((film)=>article.appendChild(createMovieElt(film)))
+        }
+        );
 
     return  article;
 }
 
-export function createPaginationButtonElt(materialIcon, isDisabled, page){
+export function createPaginationButtonElt(materialIcon, isDisabled,page){
 
     const bouton=document.createElement("button");
     bouton.className="button";
     bouton.type="button";
-
-    bouton.addEventListener("click",updateMoviesElt);
+    console.log(page)
+    bouton.addEventListener("click",()=>{
+        updateMoviesElt(page);
+    });
 
     if(isDisabled){
         bouton.disabled=true;
     }
 
     const span=document.createElement('span');
-    span.className="material-symbols-outlined";
+    span.className=`material-symbols-outlined`;
     span.textContent=materialIcon;
     bouton.appendChild(span);
 
@@ -69,12 +74,12 @@ export function updatePaginationElt(pagination) {
     if(pagination.last!==1){
         const nav = document.querySelector('nav.pagination');
         if (pagination.current === 1) {
-            nav.appendChild(createPaginationButtonElt('first__page', true, 1))
-            nav.appendChild(createPaginationButtonElt('navigate__before', true, pagination.current - 1))
+            nav.appendChild(createPaginationButtonElt('first_page', true, 1))
+            nav.appendChild(createPaginationButtonElt('navigate_before', true,1))
 
         } else {
-            nav.appendChild(createPaginationButtonElt('first__page', false, 1))
-            nav.appendChild(createPaginationButtonElt('navigate__before', false, pagination.current - 1))
+            nav.appendChild(createPaginationButtonElt('first_page', false, 1))
+            nav.appendChild(createPaginationButtonElt('navigate_before', false, pagination.current - 1))
         }
 
         const span = document.createElement("span")
@@ -83,12 +88,12 @@ export function updatePaginationElt(pagination) {
         nav.appendChild(span);
 
         if (pagination.current === pagination.last) {
-            nav.appendChild(createPaginationButtonElt('navigate__next', true, pagination.current + 1))
-            nav.appendChild(createPaginationButtonElt('last__page', true, pagination.last))
+            nav.appendChild(createPaginationButtonElt('navigate__next', true, pagination.last ))
+            nav.appendChild(createPaginationButtonElt('last_page', true, pagination.last))
         }
         else{
-            nav.appendChild(createPaginationButtonElt('navigate__next', false, pagination.current + 1))
-            nav.appendChild(createPaginationButtonElt('last__page', false, pagination.last))
+            nav.appendChild(createPaginationButtonElt('navigate_next', false, parseInt(pagination.current) + 1))
+            nav.appendChild(createPaginationButtonElt('last_page', false, pagination.last))
         }
         return nav;
     }

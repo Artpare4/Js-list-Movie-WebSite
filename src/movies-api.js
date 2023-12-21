@@ -1,8 +1,8 @@
 export const API_URL="http://movies-api";
 
-export function getAllMovies(){
+export function getAllMovies(page=1){
     let $request;
-    $request=fetch(`${API_URL}/movies`);
+    $request=fetch(`${API_URL}/movies?page=${page}`);
     return $request.then((response)=>extractCollectionAndPagination(response))
 }
 
